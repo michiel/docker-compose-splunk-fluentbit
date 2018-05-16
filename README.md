@@ -11,9 +11,7 @@ Bring up the containers by running,
     docker-compose build
     docker-compose up
 
-Notes,
-
- - To bring down and clean up the container run `docker-compose down`
+To bring down and clean up the containers run `docker-compose down`
 
 ## Composition
 
