@@ -3,31 +3,36 @@ version: '3'
 services:
   splunk:
     hostname: splunk
-    build:
-      context: ./docker-splunk
-      dockerfile: Dockerfile
+    image: splunk/splunk:7.0.3
     environment:
       SPLUNK_START_ARGS: --accept-license
       SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
+      SPLUNK_ENABLE_DEPLOY_SERVER: 'true'
     ports:
       - "8000:8000" # splunk UI
+    volumes:
+      - "./splunk-apps/demo_hf:/opt/splunk/etc/apps/demo_hf"
+      - "./splunk-apps/demo_idx:/opt/splunk/etc/apps/demo_idx"
+      - "./splunk-apps/demo_shc:/opt/splunk/etc/apps/demo_shc"
+
   splunkforwarder:
     hostname: splunkforwarder
-    build:
-      context: ./docker-splunkforwarder
-      dockerfile: Dockerfile
+    image: splunk/universalforwarder:7.0.3
     links:
       - "splunk"
     environment:
       SPLUNK_START_ARGS: --accept-license
       SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
+      SPLUNK_FORWARD_SERVER: 'splunk:9997'
+      SPLUNK_DEPLOYMENT_SERVER: 'splunk:8089'
     ports:
       - "8001:8000" # splunk UI
+    volumes:
+      - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
+
   fluentbit:
      hostname: fluentbit
-     build:
-       context: ./docker-fluentbit
-       dockerfile: Dockerfile
+     image: sddmelb/fluent-bit:travis-84
      links:
        - "splunkforwarder"
      volumes:
