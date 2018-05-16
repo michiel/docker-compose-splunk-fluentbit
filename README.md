@@ -2,9 +2,9 @@
 
 This docker-compose image uses,
 
- - The public, official splunk enterprise image
- - The public, official splunk enterprise universalforwarder image
- - A public, unofficial fluentbit image
+ - [The public, official splunk enterprise image](https://hub.docker.com/r/splunk/splunk/)
+ - [The public, official splunk enterprise universalforwarder image](https://hub.docker.com/r/splunk/universalforwarder/)
+ - [A public, unofficial fluentbit image](https://hub.docker.com/r/sddmelb/fluent-bit/)
 
 Bring up the containers by running,
 
@@ -45,10 +45,9 @@ The admin password for both Splunk containers is set to `admin`
 
 ## Shell
 
-If you want to interact with the containers, run the commands below.
+For a shell on the containers, run the commands below.
 
     ./script/shell-splunk.sh
     ./script/shell-splunkforwarder.sh
     ./script/shell-fluentbit.sh
-
 
