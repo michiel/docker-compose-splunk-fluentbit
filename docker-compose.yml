@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  splunk:
+    hostname: splunk
+    build:
+      context: ./docker-splunk
+      dockerfile: Dockerfile
+    environment:
+      SPLUNK_START_ARGS: --accept-license
+      SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
+    ports:
+      - "8000:8000" # splunk UI
+  splunkforwarder:
+    hostname: splunkforwarder
+    build:
+      context: ./docker-splunkforwarder
+      dockerfile: Dockerfile
+    links:
+      - "splunk"
+    environment:
+      SPLUNK_START_ARGS: --accept-license
+      SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
+    ports:
+      - "8001:8000" # splunk UI
+  fluentbit:
+     hostname: fluentbit
+     build:
+       context: ./docker-fluentbit
+       dockerfile: Dockerfile
+     links:
+       - "splunkforwarder"
+     volumes:
+       - "./volumes/logs:/mnt/logs"
+

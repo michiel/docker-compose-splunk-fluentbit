@@ -1,0 +1,6 @@
+*swp
+*log
+*spl
+*swo
+volumes/*splunk*
+volumes/*hazelcast*
