@@ -1,4 +1,4 @@
-# docker-compose image for Splunk + fluent-bit
+# docker-compose for Splunk + fluent-bit
 
 This docker-compose image uses,
 
@@ -33,6 +33,8 @@ To bring down and clean up the containers run `docker-compose down`
        |Splunk SHC|              
        `----------'   
 ```
+
+The Splunk HF, IDX and SHC components are all run by the main `splunk` image.
 
 ## UI   
 
