@@ -15,12 +15,35 @@ Notes,
 
  - To bring down and clean up the container run `docker-compose down`
 
+## Composition
+
+```
+,----------.    ,---.     ,---------.
+|fluent-bit|    |HEC|     |Splunk UF|
+|----------|    |---|     |---------|
+|----------|--->|---|---->|---------|
+`----------'    `---'     `---------'
+                            |    
+                            |    
+       ,----------.   ,---------.
+       |Splunk IDX|   |Splunk HF|
+       |----------|---|---------|
+       |----------|   |---------|
+       `----------'   `---------'
+             |                   
+       ,----------.              
+       |Splunk SHC|              
+       |----------|              
+       |----------|              
+       `----------'   
+```
+
 ## UI   
 
 | Function       | URL                                              |
 |----------------|--------------------------------------------------|
 | Splunk UI      | [http://localhost:8000/](http://localhost:8000/) |
-| Splunk UF UI   | [http://localhost:8000/](http://localhost:8000/) |
+| Splunk UF UI   | [http://localhost:8001/](http://localhost:8001/) |
 
 The admin password for both Splunk containers is set to `admin`
 
