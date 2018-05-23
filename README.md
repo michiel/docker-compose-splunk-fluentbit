@@ -17,25 +17,6 @@ To bring down and clean up the containers run `docker-compose down`
 
 ![fluent-bit Splunk HEC](/resource/splunk-fluentbit-components.png?raw=true "fluent-bit Splunk HEC")
 
-```
-,---------------.                   
-|Logs and events|                   
-`---------------'                   
-      |                           
-,----------.    ,---.     ,---------.
-|fluent-bit|--->|HEC|---->|Splunk UF|
-`----------'    `---'     `---------'
-                             |    
-       ,----------.   ,---------.
-       |Splunk IDX|<--|Splunk HF|
-       `----------'   `---------'
-             ^                   
-             |                   
-       ,----------.   ,------.   
-       |Splunk SHC|<--| User |   
-       `----------'   `------'
-```
-
 The Splunk HF, IDX and SHC components are all run by the main `splunk` image.
 
 ## UI   
