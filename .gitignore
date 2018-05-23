@@ -2,5 +2,5 @@
 *log
 *spl
 *swo
-volumes/*splunk*
-volumes/*hazelcast*
+splunk-apps/demo_shc/local/
+local.*
