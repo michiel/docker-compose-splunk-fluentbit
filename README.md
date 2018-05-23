@@ -41,7 +41,6 @@ The Splunk HF, IDX and SHC components are all run by the main `splunk` image.
 | Function       | URL                                              | Username  | Password |
 |----------------|--------------------------------------------------|-----------|----------|
 | Splunk UI      | [http://localhost:8000/](http://localhost:8000/) | admin     | admin    |
-| Splunk UF UI   | [http://localhost:8001/](http://localhost:8001/) | admin     | admin    |
 
 ## Shell
 
