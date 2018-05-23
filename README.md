@@ -29,9 +29,9 @@ To bring down and clean up the containers run `docker-compose down`
        `----------'   `---------'
              ^                   
              |                   
-       ,----------.              
-       |Splunk SHC|              
-       `----------'   
+       ,----------.   ,------.   
+       |Splunk SHC|<--| User |   
+       `----------'   `------'
 ```
 
 The Splunk HF, IDX and SHC components are all run by the main `splunk` image.
