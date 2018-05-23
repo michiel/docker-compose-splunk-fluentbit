@@ -1,0 +1,33 @@
+@startuml
+skinparam componentStyle uml2
+scale 1.5
+
+component DataSource
+
+package "Integration" {
+  component "fluent-bit" as fluentbit
+  interface "HTTP Event Collector" as HEC
+  component "Splunk UF" as UF
+}
+
+package Splunk {
+  component "Splunk HF" as HF
+  component "Splunk IDX" as IDX
+  component "Splunk SHC" as SHC
+}
+
+component Browser
+
+DataSource -d-> fluentbit
+fluentbit -l-> HEC
+HEC -l-> UF
+UF -d-> HF
+HF -r-> IDX
+SHC -u-> IDX
+
+Browser -r-> SHC
+
+
+@enduml
+
+

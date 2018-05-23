@@ -15,6 +15,8 @@ To bring down and clean up the containers run `docker-compose down`
 
 ## Composition
 
+![fluent-bit Splunk HEC](/resource/splunk-fluent-bit-components.png?raw=true "fluent-bit Splunk HEC")
+
 ```
 ,---------------.                   
 |Logs and events|                   
