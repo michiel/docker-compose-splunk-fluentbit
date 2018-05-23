@@ -2,9 +2,9 @@
 
 This docker-compose image uses,
 
- - [The public, official splunk enterprise image](https://hub.docker.com/r/splunk/splunk/)
- - [The public, official splunk enterprise universalforwarder image](https://hub.docker.com/r/splunk/universalforwarder/)
- - [A public, unofficial fluentbit image](https://hub.docker.com/r/sddmelb/fluent-bit/)
+ - [A public, official splunk enterprise image](https://hub.docker.com/r/splunk/splunk/)
+ - [A public, official splunk enterprise universalforwarder image](https://hub.docker.com/r/splunk/universalforwarder/)
+ - [A public, official fluentbit image](https://hub.docker.com/r/fluent/fluent-bit/)
 
 Bring up the containers by running,
 
