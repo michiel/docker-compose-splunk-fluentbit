@@ -7,7 +7,7 @@ services:
     environment:
       SPLUNK_START_ARGS: --accept-license
       SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
-      SPLUNK_ENABLE_DEPLOY_SERVER: 'true'
+      SPLUNK_ENABLE_LISTEN: 9997
     ports:
       - "8000:8000" # splunk UI
     volumes:
@@ -24,9 +24,9 @@ services:
       SPLUNK_START_ARGS: --accept-license
       SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
       SPLUNK_FORWARD_SERVER: 'splunk:9997'
-      SPLUNK_DEPLOYMENT_SERVER: 'splunk:8089'
     ports:
       - "8001:8000" # splunk UI
+      - "8088:8088" # splunk HEC
     volumes:
       - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
 
@@ -36,5 +36,5 @@ services:
      links:
        - "splunkforwarder"
      volumes:
-       - "./volumes/logs:/mnt/logs"
+       - "./volumes/fluent-bit-etc:/fluent-bit/etc"
 

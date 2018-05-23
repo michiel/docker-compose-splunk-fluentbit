@@ -51,3 +51,7 @@ For a shell on the containers, run the commands below.
     ./script/shell-splunkforwarder.sh
     ./script/shell-fluentbit.sh
 
+## Testing
+
+    curl -u 'x:3e6ffd12-0f69-46bb-ad0d-71cffb661a0d' -X POST -d'{"event":"xxx"}' http://localhost:8088/services/collector/event
+
