@@ -32,7 +32,7 @@ services:
 
   fluentbit:
      hostname: fluentbit
-     image: sddmelb/fluent-bit:travis-84
+     image: fluent/fluent-bit:0.13.2
      links:
        - "splunkforwarder"
      volumes:
