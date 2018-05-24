@@ -19,7 +19,7 @@ To bring down and clean up the containers run `docker-compose down`
 
 The Splunk HF, IDX and SHC components are all run by the main `splunk` image.
 
-## fluent-bit pipeline
+## Pipeline - fluent-bit
 
 ![fluent-bit pipeline](/resource/fluent-bit-pipeline.png?raw=true "fluent-bit pipeline")
 
