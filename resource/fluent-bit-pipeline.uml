@@ -1,0 +1,39 @@
+@startuml
+skinparam componentStyle uml2
+
+component Input
+component Parser
+component Filter
+component Buffer
+component Routing
+component Output
+
+Input -> Parser
+Parser -> Filter
+Filter -> Buffer
+Buffer -> Routing
+Routing -> Output
+
+note top of Input
+  * Input host : tail log
+  * Input k8s : systemd log
+end note
+
+note top of Filter
+  k8s events :
+  * Enrich with k8s data
+  * Nest k8s fields
+end note
+
+note top of Filter
+  k8s + hosts events :
+  * Nest log in event
+  * Cleanup
+  * Add index, source, sourcetype
+end note
+
+note top of Output
+  Send to Splunk HEC
+end note
+
+@enduml
