@@ -13,6 +13,20 @@ Bring up the containers by running,
 
 To bring down and clean up the containers run `docker-compose down`
 
+## Functionality
+
+This composition configures fluent-bit to read out memory and CPU metrics,
+transform them and send them to Splunk via the HTTP Event Collector (HEC). The
+main Splunk instance contains an example dashboard displaying the incoming
+metrics.
+
+## UI   
+
+| Function       | URL                                              | Username  | Password |
+|----------------|--------------------------------------------------|-----------|----------|
+| Splunk UI      | [http://localhost:8000/](http://localhost:8000/) | admin     | admin    |
+
+
 ## Composition
 
 ![fluent-bit Splunk HEC](/resource/splunk-fluentbit-components.png?raw=true "fluent-bit Splunk HEC")
@@ -24,12 +38,6 @@ The Splunk HF, IDX and SHC components are all run by the main `splunk` image.
 ![fluent-bit pipeline](/resource/fluent-bit-pipeline.png?raw=true "fluent-bit pipeline")
 
 Main [`fluent-bit.conf`](/volumes/fluent-bit-etc/fluent-bit.conf)
-
-## UI   
-
-| Function       | URL                                              | Username  | Password |
-|----------------|--------------------------------------------------|-----------|----------|
-| Splunk UI      | [http://localhost:8000/](http://localhost:8000/) | admin     | admin    |
 
 ## Shell
 
