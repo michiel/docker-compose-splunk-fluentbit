@@ -1,8 +1,7 @@
 @startuml
 skinparam componentStyle uml2
-scale 1.5
 
-component DataSource
+component "Log and events" as DataSource
 
 package "Integration" {
   component "fluent-bit" as fluentbit
