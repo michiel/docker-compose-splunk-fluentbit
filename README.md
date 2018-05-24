@@ -25,7 +25,7 @@ The Splunk HF, IDX and SHC components are all run by the main `splunk` image.
 
 ![fluent-bit pipeline](/resource/fluent-bit-pipeline.png?raw=true "fluent-bit pipeline")
 
-[Main fluent-bit.conf](/volumes/fluent-bit-etc/fluent-bit.conf)
+Main [`fluent-bit.conf`](/volumes/fluent-bit-etc/fluent-bit.conf)
 
 ## UI   
 
