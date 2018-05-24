@@ -1,4 +1,6 @@
-# docker-compose for Splunk + fluent-bit
+# Splunk + fluent-bit integration via HEC
+
+_Work in progress_
 
 This docker-compose image uses,
 
