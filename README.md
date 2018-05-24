@@ -1,7 +1,5 @@
 # Splunk + fluent-bit integration via HEC
 
-_Work in progress_
-
 This docker-compose image uses,
 
  - [A public, official splunk enterprise image](https://hub.docker.com/r/splunk/splunk/)
