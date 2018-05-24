@@ -1,10 +1,11 @@
 # Splunk + fluent-bit integration via HEC
 
-This docker-compose image uses,
+## Functionality
 
- - [A public, official splunk enterprise image](https://hub.docker.com/r/splunk/splunk/)
- - [A public, official splunk enterprise universalforwarder image](https://hub.docker.com/r/splunk/universalforwarder/)
- - [A public, official fluentbit image](https://hub.docker.com/r/fluent/fluent-bit/)
+This composition configures fluent-bit to read out memory and CPU metrics,
+transform them and send them to Splunk via the HTTP Event Collector (HEC). The
+main Splunk instance contains an example dashboard displaying the incoming
+metrics.
 
 Bring up the containers by running,
 
@@ -13,21 +14,19 @@ Bring up the containers by running,
 
 To bring down and clean up the containers run `docker-compose down`
 
-## Functionality
-
-This composition configures fluent-bit to read out memory and CPU metrics,
-transform them and send them to Splunk via the HTTP Event Collector (HEC). The
-main Splunk instance contains an example dashboard displaying the incoming
-metrics.
-
 ## UI   
 
 | Function       | URL                                              | Username  | Password |
 |----------------|--------------------------------------------------|-----------|----------|
 | Splunk UI      | [http://localhost:8000/](http://localhost:8000/) | admin     | admin    |
 
-
 ## Composition
+
+This docker-compose image uses,
+
+ - [A public, official splunk enterprise image](https://hub.docker.com/r/splunk/splunk/)
+ - [A public, official splunk enterprise universalforwarder image](https://hub.docker.com/r/splunk/universalforwarder/)
+ - [A public, official fluentbit image](https://hub.docker.com/r/fluent/fluent-bit/)
 
 ![fluent-bit Splunk HEC](/resource/splunk-fluentbit-components.png?raw=true "fluent-bit Splunk HEC")
 
