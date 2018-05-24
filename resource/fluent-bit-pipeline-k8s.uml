@@ -15,20 +15,21 @@ Buffer -> Routing
 Routing -> Output
 
 note top of Input
-  * Input cpu stats
-  * Input mem stats
+  * Input host : tail log
+  * Input k8s : systemd log
 end note
 
 note top of Filter
-  * All : nest metrics under event
-  * cpu: Add sourcetype cpustats
-  * mem: Add sourcetype memstats
+  k8s events :
+  * Enrich with k8s data
+  * Nest k8s fields
 end note
 
 note top of Filter
-  * Add index
-  * Add hostname
-  * Nest hostname under fields
+  k8s + hosts events :
+  * Nest log in event
+  * Cleanup
+  * Add index, source, sourcetype
 end note
 
 note top of Output
