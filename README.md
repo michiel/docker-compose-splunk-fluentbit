@@ -9,10 +9,11 @@ metrics.
 
 Bring up the containers by running,
 
-    docker-compose build
     docker-compose up
 
-To bring down and clean up the containers run `docker-compose down`
+To bring down and clean up the containers run,
+
+    docker-compose down
 
 ## UI   
 
@@ -37,6 +38,10 @@ The Splunk HF, IDX and SHC components are all run by the main `splunk` image.
 ![fluent-bit pipeline](/resource/fluent-bit-pipeline.png?raw=true "fluent-bit pipeline")
 
 Main [`fluent-bit.conf`](/volumes/fluent-bit-etc/fluent-bit.conf)
+
+It uses the fluent-bit `http` output plugin with the plugin's Basic
+Authentication. See [Format events for HTTP Event Collector](https://docs.splunk.com/Documentation/Splunk/7.0.3/Data/FormateventsforHTTPEventCollector)
+for the Splunk HEC documentation.
 
 ## Shell
 
