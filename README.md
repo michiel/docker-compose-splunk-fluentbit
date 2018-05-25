@@ -53,5 +53,20 @@ For a shell on the containers, run the commands below.
 
 ## Testing
 
-    curl -u 'x:3e6ffd12-0f69-46bb-ad0d-71cffb661a0d' -X POST -d'{"event":"xxx"}' http://localhost:8088/services/collector/event
+The HEC port is exposed in the `docker-compose.yml` file. This opens the HEC on localhost:8088.
+
+```
+curl -u 'x:3e6ffd12-0f69-46bb-ad0d-71cffb661a0d' -X POST -d'
+{
+    "event": {
+        "event_key1": "value1",
+        "event_key1": "value1"
+    },
+    "fields": {
+        "field_key1": "value1",
+        "field_key1": "value1"
+    }
+}' http://localhost:8088/services/collector/event
+```
+
 

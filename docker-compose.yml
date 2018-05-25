@@ -25,8 +25,7 @@ services:
       SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
       SPLUNK_FORWARD_SERVER: 'splunk:9997'
     ports:
-      - "8001:8000" # splunk UI
-      # - "8088:8088" # splunk HEC
+      - "8088:8088" # splunk HEC
     volumes:
       - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
 
