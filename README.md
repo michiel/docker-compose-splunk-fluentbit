@@ -55,6 +55,8 @@ For a shell on the containers, run the commands below.
 
 The HEC port is exposed in the `docker-compose.yml` file. This opens the HEC on localhost:8088.
 
+To see it in action, run the cURL command,
+
 ```
 curl -u 'x:3e6ffd12-0f69-46bb-ad0d-71cffb661a0d' -X POST -d'
 {
@@ -69,4 +71,9 @@ curl -u 'x:3e6ffd12-0f69-46bb-ad0d-71cffb661a0d' -X POST -d'
 }' http://localhost:8088/services/collector/event
 ```
 
+If the interface is up and running, The expected response is,
+
+```
+{"text":"Success","code":0}
+```
 
