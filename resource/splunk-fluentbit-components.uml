@@ -31,7 +31,6 @@ UF -d-> HF #Red
 HF -r-> IDX #Red
 SHC -u-> IDX #Red
 
-
 Prometheus -u-> Scraper #Blue
 Scraper -u-> fluentbit #Blue
 Scraper -u-> mtail #Blue
