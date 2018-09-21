@@ -20,6 +20,8 @@ To bring down and clean up the containers run,
 | Function       | URL                                              | Username  | Password |
 |----------------|--------------------------------------------------|-----------|----------|
 | Splunk UI      | [http://localhost:8000/](http://localhost:8000/) | admin     | admin    |
+| Prometheus     | [http://localhost:9090/](http://localhost:9090/) | admin     | admin    |
+| Grafana        | [http://localhost:3000/](http://localhost:3030/) | admin     | admin    |
 
 ## Composition
 
@@ -28,6 +30,7 @@ This docker-compose image uses,
  - [A public, official splunk enterprise image](https://hub.docker.com/r/splunk/splunk/)
  - [A public, official splunk enterprise universalforwarder image](https://hub.docker.com/r/splunk/universalforwarder/)
  - [A public, official fluentbit image](https://hub.docker.com/r/fluent/fluent-bit/)
+ - [A public, _unofficial, unverified_ mtail image](https://hub.docker.com/r/XXX/mtail/)
 
 ![fluent-bit Splunk HEC](/resource/splunk-fluentbit-components.png?raw=true "fluent-bit Splunk HEC")
 
