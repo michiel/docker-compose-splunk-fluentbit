@@ -1,0 +1,31 @@
+
+### Upstream connection established
+
+/opt/splunk/var/log/splunk/splunkd.log
+```
+09-21-2018 11:35:34.956 +0000 INFO  TcpOutputProc - Connected to idx=172.19.0.2:9997, pset=0, reuse=0.
+```
+
+### Upstream connection closed/timedout?
+
+
+
+### Upstream connection failed
+
+/opt/splunk/var/log/splunk/splunkd.log
+```
+09-21-2018 11:35:05.171 +0000 WARN  TcpOutputFd - Connect to 172.19.0.2:9997 failed. Connection refused
+09-21-2018 11:35:05.171 +0000 ERROR TcpOutputFd - Connection to host=172.19.0.2:9997 failed
+```
+
+### Throughput / queue
+
+/opt/splunk/var/log/splunk/metrics.log
+
+```
+09-21-2018 11:42:49.797 +0000 INFO  Metrics - group=queue, name=tcpin_cooked_pqueue, max_size_kb=0, current_size_kb=0, current_size=0, largest_size=0, smallest_size=0
+09-21-2018 11:42:49.797 +0000 INFO  Metrics - group=thruput, name=cooked_output, instantaneous_kbps=0.21551437870299886, instantaneous_eps=0.0967782738452876, average_kbps=0.23885401715875615, total_k_processed=111, kb=6.6806640625, ev=3
+09-21-2018 11:42:49.797 +0000 INFO  Metrics - group=thruput, name=uncooked_output, instantaneous_kbps=0, instantaneous_eps=0, average_kbps=0, total_k_processed=0, kb=0, ev=0
+```
+
+

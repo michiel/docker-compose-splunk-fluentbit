@@ -28,12 +28,26 @@ services:
       - "8088:8088" # splunk HEC
     volumes:
       - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
+      - "splunklogs:/opt/splunk/var/log"
 
   fluentbit:
-     hostname: fluentbit
-     image: fluent/fluent-bit:0.13.2
-     links:
-       - "splunkforwarder"
-     volumes:
-       - "./volumes/fluent-bit-etc:/fluent-bit/etc"
+    hostname: fluentbit
+    image: fluent/fluent-bit:0.13.2
+    links:
+      - "splunkforwarder"
+    volumes:
+      - "./volumes/fluent-bit-etc:/fluent-bit/etc"
 
+  mtail:
+    hostname: mtail
+    image: mtail-latest:latest
+    volumes:
+      - "splunklogs:/logs"
+      - "./volumes/mtail-progs:/progs"
+    entrypoint:
+      - "/usr/bin/mtail"
+      - "--logs=/logs/splunk/splunkd.log"
+      - "--progs=/progs"
+
+volumes:
+  splunklogs:
