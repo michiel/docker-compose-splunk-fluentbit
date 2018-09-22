@@ -48,6 +48,20 @@ services:
       - "/usr/bin/mtail"
       - "--logs=/logs/splunk/splunkd.log"
       - "--progs=/progs"
+    ports:
+     - 3903:3903
+
+  prom:
+    hostname: prometheus
+    image: prom/prometheus:v2.4.2
+    volumes:
+     - ./volumes/prometheus-server/prometheus.yml:/etc/prometheus/prometheus.yml
+    command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
+    ports:
+     - 9090:9090
+    links:
+      - "mtail"
+      - "fluentbit"
 
 volumes:
   splunklogs:

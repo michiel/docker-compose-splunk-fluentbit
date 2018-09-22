@@ -3,14 +3,14 @@ counter splunk_tcpout_connections_refused_total
 counter splunk_tcpout_connections_failed_total
 
 /^.* INFO  TcpOutputProc - Connected to idx=\d+.\d+.\d+.\d+:9997,.*/ {
-	counter splunk_tcpout_connections_established_total++
+	splunk_tcpout_connections_established_total++
 }
 
 /^.* WARN  TcpOutputFd - Connect to \d+.\d+.\d+.\d+:9997 failed. Connection refused.*/ {
-	counter splunk_tcpout_connections_refused_total++
+	splunk_tcpout_connections_refused_total++
 }
 
 /^.* ERROR TcpOutputFd - Connection to host=\d+.\d+.\d+.\d+:9997 failed.*/ {
-	counter splunk_tcpout_connections_failed_total++
+	splunk_tcpout_connections_failed_total++
 }
 
