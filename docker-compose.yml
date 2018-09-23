@@ -51,7 +51,7 @@ services:
     ports:
      - 3903:3903
 
-  prom:
+  prometheus:
     hostname: prometheus
     image: prom/prometheus:v2.4.2
     volumes:
@@ -62,6 +62,14 @@ services:
     links:
       - "mtail"
       - "fluentbit"
+
+  grafana:
+    hostname: grafana
+    image: grafana/grafana:5.2.4
+    ports:
+     - 3000:3000
+    links:
+      - "prometheus"
 
 volumes:
   splunklogs:
