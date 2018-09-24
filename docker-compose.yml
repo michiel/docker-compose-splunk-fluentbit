@@ -66,6 +66,10 @@ services:
   grafana:
     hostname: grafana
     image: grafana/grafana:5.2.4
+    volumes:
+     - ./volumes/grafana-config/config.ini:/etc/grafana/config.ini
+     - ./volumes/grafana-provisioning:/etc/grafana/provisioning
+     - ./volumes/grafana-dashboards:/var/lib/grafana/dashboards
     ports:
      - 3000:3000
     links:
