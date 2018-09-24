@@ -47,6 +47,7 @@ services:
     entrypoint:
       - "/usr/bin/mtail"
       - "--logs=/logs/splunk/splunkd.log"
+      - "--logs=/logs/splunk/metrics.log"
       - "--progs=/progs"
     ports:
      - 3903:3903

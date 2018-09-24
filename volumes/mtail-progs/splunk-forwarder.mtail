@@ -14,3 +14,9 @@ counter splunk_tcpout_connections_failed_total
 	splunk_tcpout_connections_failed_total++
 }
 
+counter splunk_thruput_cooked_output_events_total
+
+/^.* INFO  Metrics - group=thruput, name=cooked_output, .* ev=(?P<events>\d+).*/ {
+  splunk_thruput_cooked_output_events_total += $events
+}
+
