@@ -48,6 +48,7 @@ services:
       - "/usr/bin/mtail"
       - "--logs=/logs/splunk/splunkd.log"
       - "--logs=/logs/splunk/metrics.log"
+      - "--logs=/logs/introspection/http_event_collector_metrics.log"
       - "--progs=/progs"
     ports:
      - 3903:3903

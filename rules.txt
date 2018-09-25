@@ -29,3 +29,10 @@
 ```
 
 
+/opt/splunk/var/log/introspection/http_event_collector_metrics.log
+
+```
+introspection/http_event_collector_metrics.log:{"datetime":"09-25-2018 07:42:41.017 +0000","log_level":"INFO","component":"HttpEventCollector","data":{"series":"http_event_collector","transport":"http","format":"json","total_bytes_received":46393,"total_bytes_indexed":29113,"num_of_requests":36,"num_of_events":180,"num_of_errors":0,"num_of_parser_errors":0,"num_of_auth_failures":0,"num_of_requests_to_disabled_token":0,"num_of_requests_to_incorrect_url":0,"num_of_requests_in_mint_format":0,"num_of_ack_requests":0,"num_of_requests_acked":0,"num_of_requests_waiting_ack":0}}
+
+introspection/http_event_collector_metrics.log:{"datetime":"09-25-2018 07:42:41.017 +0000","log_level":"INFO","component":"HttpEventCollector","data":{"token_name":"fluentbit_demo_token","series":"http_event_collector_token","transport":"http","format":"json","total_bytes_received":46393,"total_bytes_indexed":29113,"num_of_requests":36,"num_of_events":180,"num_of_errors":0,"num_of_parser_errors":0,"num_of_requests_to_disabled_token":0,"num_of_requests_in_mint_format":0}}
+```
