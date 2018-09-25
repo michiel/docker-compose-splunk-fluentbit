@@ -707,19 +707,16 @@
           "expr": "(rate(splunk_hec_total_bytes_indexed[2m]) / rate(splunk_hec_num_of_events[2m]))",
           "format": "time_series",
           "intervalFactor": 1,
+          "legendFormat": "rate bytes/event",
           "refId": "B"
         },
         {
-          "expr": "",
+          "expr": "(stddev_over_time(splunk_hec_total_bytes_indexed[2m]) / stddev_over_time(splunk_hec_num_of_events[2m]))",
           "format": "time_series",
+          "instant": false,
           "intervalFactor": 1,
-          "refId": "C"
-        },
-        {
-          "expr": "",
-          "format": "time_series",
-          "intervalFactor": 1,
-          "refId": "D"
+          "legendFormat": "stddev bytes/event",
+          "refId": "A"
         }
       ],
       "thresholds": [],
@@ -801,16 +798,23 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(splunk_hec_num_of_events[2m]) / rate(splunk_hec_num_of_requests[2m])",
+          "expr": "splunk_hec_num_of_requests_all",
           "format": "time_series",
           "intervalFactor": 1,
+          "legendFormat": "",
           "refId": "A"
+        },
+        {
+          "expr": "",
+          "format": "time_series",
+          "intervalFactor": 1,
+          "refId": "B"
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "HEC input - Average events / request",
+      "title": "HEC input - Open requests",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -957,8 +961,8 @@
     "list": []
   },
   "time": {
-    "from": "2018-09-25T11:16:26.329Z",
-    "to": "2018-09-25T11:37:39.311Z"
+    "from": "2018-09-25T21:17:12.011Z",
+    "to": "2018-09-25T21:27:12.011Z"
   },
   "timepicker": {
     "refresh_intervals": [

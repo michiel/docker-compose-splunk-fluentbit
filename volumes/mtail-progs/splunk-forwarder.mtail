@@ -22,21 +22,39 @@ gauge splunk_thruput_cooked_output_total_k_processed
   splunk_thruput_cooked_output_total_k_processed = $total_k
 }
 
-gauge splunk_hec_total_bytes_received
-gauge splunk_hec_total_bytes_indexed
-gauge splunk_hec_num_of_requests
-gauge splunk_hec_num_of_events
-gauge splunk_hec_num_of_errors
-gauge splunk_hec_num_of_parser_errors
-gauge splunk_hec_num_of_auth_failures
+gauge splunk_hec_total_bytes_received_all
+gauge splunk_hec_total_bytes_indexed_all
+gauge splunk_hec_num_of_requests_all
+gauge splunk_hec_num_of_events_all
+gauge splunk_hec_num_of_errors_all
+gauge splunk_hec_num_of_parser_errors_all
+gauge splunk_hec_num_of_auth_failures_all
 
 /^.*"log_level":"INFO","component":"HttpEventCollector".*"series":"http_event_collector".*"total_bytes_received":(?P<total_bytes_received>[^,]+),"total_bytes_indexed":(?P<total_bytes_indexed>[^,]+),"num_of_requests":(?P<num_of_requests>[^,]+),"num_of_events":(?P<num_of_events>[^,]+),"num_of_errors":(?P<num_of_errors>[^,]+),"num_of_parser_errors":(?P<num_of_parser_errors>[^,]+),"num_of_auth_failures":(?P<num_of_auth_failures>[^,]+),.*/ {
 
-	splunk_hec_total_bytes_received = $total_bytes_received
-	splunk_hec_total_bytes_indexed = $total_bytes_indexed
-  splunk_hec_num_of_requests = $num_of_requests
-  splunk_hec_num_of_events = $num_of_events
-  splunk_hec_num_of_errors = $num_of_errors
-  splunk_hec_num_of_parser_errors = $num_of_parser_errors
-  splunk_hec_num_of_auth_failures = $num_of_auth_failures
+	splunk_hec_total_bytes_received_all = $total_bytes_received
+	splunk_hec_total_bytes_indexed_all = $total_bytes_indexed
+  splunk_hec_num_of_requests_all = $num_of_requests
+  splunk_hec_num_of_events_all = $num_of_events
+  splunk_hec_num_of_errors_all = $num_of_errors
+  splunk_hec_num_of_parser_errors_all = $num_of_parser_errors
+  splunk_hec_num_of_auth_failures_all = $num_of_auth_failures
+}
+
+gauge splunk_hec_total_bytes_received by token
+gauge splunk_hec_total_bytes_indexed by token
+gauge splunk_hec_num_of_requests by token
+gauge splunk_hec_num_of_events by token
+gauge splunk_hec_num_of_errors by token
+gauge splunk_hec_num_of_parser_errors by token
+
+/^.*"log_level":"INFO","component":"HttpEventCollector".*"token_name":"(?P<token>[^"]+)","series":"http_event_collector_token".*"total_bytes_received":(?P<total_bytes_received>[^,]+),"total_bytes_indexed":(?P<total_bytes_indexed>[^,]+),"num_of_requests":(?P<num_of_requests>[^,]+),"num_of_events":(?P<num_of_events>[^,]+),"num_of_errors":(?P<num_of_errors>[^,]+),"num_of_parser_errors":(?P<num_of_parser_errors>[^,]+).*/ {
+
+	splunk_hec_total_bytes_received[$token] = $total_bytes_received
+	splunk_hec_total_bytes_indexed[$token] = $total_bytes_indexed
+  splunk_hec_num_of_requests[$token] = $num_of_requests
+  splunk_hec_num_of_events[$token] = $num_of_events
+  splunk_hec_num_of_errors[$token] = $num_of_errors
+  splunk_hec_num_of_parser_errors[$token] = $num_of_parser_errors
+
 }
