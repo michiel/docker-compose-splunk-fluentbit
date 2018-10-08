@@ -6,8 +6,8 @@ entity "Data Source" as DataSource
 
 box "Integration" #lightblue
   entity "fluent-bit" as fluentbit
-  entity "Splunk UF" as UF
-  entity "mtail" as mtail
+  entity "nginx" as nginx
+  entity "nginx-exporter" as nginxexporter
 end box
 
 box "Monitoring"
@@ -26,15 +26,14 @@ actor "User" as User
 == Events ==
 
 DataSource -> fluentbit
-fluentbit -> UF : HEC
-UF -> HF : TCP/Splunk forward
+fluentbit -> nginx : HTTP-Proxy/HEC
+nginx -> HF : HTTP/HEC
 HF -> IDX : TCP/Splunk forward
 
 == Metrics ==
 
-UF -> mtail : logs
-mtail -> mtail : apply rules
-mtail -> Prometheus : Metrics over HTTP
+nginx -> nginxexporter : metrics
+nginxexporter -> Prometheus : Metrics over HTTP
 fluentbit -> Prometheus : Metrics over HTTP
 
 == Reporting ==
