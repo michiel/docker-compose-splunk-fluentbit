@@ -15,8 +15,8 @@ services:
       - "./splunk-apps/demo_idx:/opt/splunk/etc/apps/demo_idx"
       - "./splunk-apps/demo_shc:/opt/splunk/etc/apps/demo_shc"
 
-  splunkforwarder:
-    hostname: splunkforwarder
+  splunkforwarder01:
+    hostname: splunkforwarder01
     image: splunk/universalforwarder:7.0.3
     links:
       - "splunk"
@@ -24,34 +24,39 @@ services:
       SPLUNK_START_ARGS: --accept-license
       SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
       SPLUNK_FORWARD_SERVER: 'splunk:9997'
-    ports:
-      - "8088:8088" # splunk HEC
     volumes:
       - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
-      - "splunklogs:/opt/splunk/var/log"
+      - "splunk01logs:/opt/splunk/var/log"
+
+  splunkforwarder02:
+    hostname: splunkforwarder02
+    image: splunk/universalforwarder:7.0.3
+    links:
+      - "splunk"
+    environment:
+      SPLUNK_START_ARGS: --accept-license
+      SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
+      SPLUNK_FORWARD_SERVER: 'splunk:9997'
+    volumes:
+      - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
+      - "splunk02logs:/opt/splunk/var/log"
+
+  nginx:
+    hostname: nginx
+    image: nginx:1.15-alpine
+    links:
+      - "splunkforwarder01"
+      - "splunkforwarder02"
+    volumes:
+      - "./volumes/nginx/nginx.conf:/etc/nginx/nginx.conf"
 
   fluentbit:
     hostname: fluentbit
     image: fluent/fluent-bit:0.13.2
     links:
-      - "splunkforwarder"
+      - "nginx"
     volumes:
       - "./volumes/fluent-bit-etc:/fluent-bit/etc"
-
-  mtail:
-    hostname: mtail
-    image: mtail-latest:latest
-    volumes:
-      - "splunklogs:/logs"
-      - "./volumes/mtail-progs:/progs"
-    entrypoint:
-      - "/usr/bin/mtail"
-      - "--logs=/logs/splunk/splunkd.log"
-      - "--logs=/logs/splunk/metrics.log"
-      - "--logs=/logs/introspection/http_event_collector_metrics.log"
-      - "--progs=/progs"
-    ports:
-     - 3903:3903
 
   prometheus:
     hostname: prometheus
@@ -62,7 +67,8 @@ services:
     ports:
      - 9090:9090
     links:
-      - "mtail"
+      - "mtailsplunk01"
+      - "mtailsplunk02"
       - "fluentbit"
 
   grafana:
@@ -78,4 +84,6 @@ services:
       - "prometheus"
 
 volumes:
-  splunklogs:
+  splunk01logs:
+  splunk02logs:
+
