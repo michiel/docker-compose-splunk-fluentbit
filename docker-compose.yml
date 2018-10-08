@@ -28,12 +28,54 @@ services:
       - "8088:8088" # splunk HEC
     volumes:
       - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
+      - "splunklogs:/opt/splunk/var/log"
 
   fluentbit:
-     hostname: fluentbit
-     image: fluent/fluent-bit:0.13.2
-     links:
-       - "splunkforwarder"
-     volumes:
-       - "./volumes/fluent-bit-etc:/fluent-bit/etc"
+    hostname: fluentbit
+    image: fluent/fluent-bit:0.13.2
+    links:
+      - "splunkforwarder"
+    volumes:
+      - "./volumes/fluent-bit-etc:/fluent-bit/etc"
 
+  mtail:
+    hostname: mtail
+    image: mtail-latest:latest
+    volumes:
+      - "splunklogs:/logs"
+      - "./volumes/mtail-progs:/progs"
+    entrypoint:
+      - "/usr/bin/mtail"
+      - "--logs=/logs/splunk/splunkd.log"
+      - "--logs=/logs/splunk/metrics.log"
+      - "--logs=/logs/introspection/http_event_collector_metrics.log"
+      - "--progs=/progs"
+    ports:
+     - 3903:3903
+
+  prometheus:
+    hostname: prometheus
+    image: prom/prometheus:v2.4.2
+    volumes:
+     - ./volumes/prometheus-server/prometheus.yml:/etc/prometheus/prometheus.yml
+    command: "--config.file=/etc/prometheus/prometheus.yml --storage.tsdb.path=/prometheus"
+    ports:
+     - 9090:9090
+    links:
+      - "mtail"
+      - "fluentbit"
+
+  grafana:
+    hostname: grafana
+    image: grafana/grafana:5.2.4
+    volumes:
+     - ./volumes/grafana-config/config.ini:/etc/grafana/config.ini
+     - ./volumes/grafana-provisioning:/etc/grafana/provisioning
+     - ./volumes/grafana-dashboards:/var/lib/grafana/dashboards
+    ports:
+     - 3000:3000
+    links:
+      - "prometheus"
+
+volumes:
+  splunklogs:

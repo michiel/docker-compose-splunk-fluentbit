@@ -1,31 +1,58 @@
 @startuml
 skinparam componentStyle uml2
 
+title Monitored Splunk integration
+
 component "Log and events" as DataSource
+
+package "Monitoring Services" {
+  component "Prometheus" as Prometheus
+  component "Grafana" as Grafana
+  interface "Prometheus Scraper" as Scraper
+}
 
 package "Integration" {
   component "fluent-bit" as fluentbit
   interface "HTTP Event Collector" as HEC
   component "Splunk UF" as UF
+  component "mtail" as mtail
 }
 
-package Splunk {
+package "Splunk Platform" {
   component "Splunk HF" as HF
   component "Splunk IDX" as IDX
   component "Splunk SHC" as SHC
 }
 
-component Browser
+DataSource -d-> fluentbit #Red
+fluentbit -d-> HEC #Red
+HEC -d-> UF #Red
+UF -d-> HF #Red
+HF -r-> IDX #Red
+SHC -u-> IDX #Red
 
-DataSource -d-> fluentbit
-fluentbit -l-> HEC
-HEC -l-> UF
-UF -d-> HF
-HF -r-> IDX
-SHC -u-> IDX
+Prometheus -u-> Scraper #Blue
+Scraper -u-> fluentbit #Blue
+Scraper -u-> mtail #Blue
+Grafana -u-> Prometheus #Blue
+mtail -l-> UF #Blue
 
-Browser -r-> SHC
+note right of fluentbit
+ * Generates metrics for all i/o
+ * Generates heartbeat + metric
+ * Reports metrics http:2020
+end note
 
+note right of mtail
+ * Generates metrics from splunk logs
+ * Reports metrics http:2021
+end note
+
+legend
+  * Arrow indicates connection initiation
+  * Red = event shipping channels
+  * Blue = metrics channels
+end legend
 
 @enduml
 

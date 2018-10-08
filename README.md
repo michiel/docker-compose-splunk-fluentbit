@@ -1,4 +1,4 @@
-# Splunk + fluent-bit integration via HEC
+# Monitored Splunk + fluent-bit integration via HEC
 
 ## Functionality
 
@@ -15,11 +15,20 @@ To bring down and clean up the containers run,
 
     docker-compose down
 
+## Notable features
+
+ - Backpressure-sensitive heartbeat
+ - Prometheus metrics for both fluent-bit and splunkforwarder
+ - Grafana dashboards
+
 ## UI   
 
 | Function       | URL                                              | Username  | Password |
 |----------------|--------------------------------------------------|-----------|----------|
 | Splunk UI      | [http://localhost:8000/](http://localhost:8000/) | admin     | admin    |
+| Prometheus     | [http://localhost:9090/](http://localhost:9090/) | admin     | admin    |
+| Grafana        | [http://localhost:3000/](http://localhost:3030/) | admin     | admin    |
+| mtail          | [http://localhost:3903/](http://localhost:3903/) |           |          |
 
 ## Composition
 
@@ -28,12 +37,21 @@ This docker-compose image uses,
  - [A public, official splunk enterprise image](https://hub.docker.com/r/splunk/splunk/)
  - [A public, official splunk enterprise universalforwarder image](https://hub.docker.com/r/splunk/universalforwarder/)
  - [A public, official fluentbit image](https://hub.docker.com/r/fluent/fluent-bit/)
+ - [A public, _unofficial, unverified_ mtail image](https://hub.docker.com/r/XXX/mtail/)
+ - [A public, official prometheus image](https://hub.docker.com/r/prom/prometheus)
+ - [A public, official grafana image](https://hub.docker.com/r/grafana/grafana)
 
-![fluent-bit Splunk HEC](/resource/splunk-fluentbit-components.png?raw=true "fluent-bit Splunk HEC")
+### Components
 
 The Splunk HF, IDX and SHC components are all run by the main `splunk` image.
 
-## Pipeline - fluent-bit
+![fluent-bit Splunk HEC](/resource/splunk-fluentbit-components.png?raw=true "fluent-bit Splunk HEC")
+
+### Data flow sequence
+
+![fluent-bit Splunk HEC](/resource/splunk-fluentbit-sequence.png?raw=true "fluent-bit Splunk HEC")
+
+## fluent-bit pipeline
 
 ![fluent-bit pipeline](/resource/fluent-bit-pipeline.png?raw=true "fluent-bit pipeline")
 
@@ -50,6 +68,9 @@ For a shell on the containers, run the commands below.
     ./script/shell-splunk.sh
     ./script/shell-splunkforwarder.sh
     ./script/shell-fluentbit.sh
+    ./script/shell-mtail.sh
+    ./script/shell-prometheus.sh
+    ./script/shell-grafan.sh
 
 ## Testing
 
