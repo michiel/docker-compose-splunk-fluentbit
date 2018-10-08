@@ -50,6 +50,15 @@ services:
     volumes:
       - "./volumes/nginx/nginx.conf:/etc/nginx/nginx.conf"
 
+  nginxexporter:
+    hostname: nginx-exporter
+    image: nginx/nginx-prometheus-exporter:0.1.0
+    command: "-nginx.scrape-uri http://nginx:2020/status"
+    links:
+      - "nginx"
+    environment:
+      SCRAPE_URI: nginx:2020/status
+
   fluentbit:
     hostname: fluentbit
     image: fluent/fluent-bit:0.13.2
@@ -67,8 +76,6 @@ services:
     ports:
      - 9090:9090
     links:
-      - "mtailsplunk01"
-      - "mtailsplunk02"
       - "fluentbit"
 
   grafana:
