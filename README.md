@@ -18,7 +18,8 @@ To bring down and clean up the containers run,
 ## Notable features
 
  - Backpressure-sensitive heartbeat
- - Prometheus metrics for both fluent-bit and splunkforwarder
+ - Transport to remote Splunk platform over HTTP
+ - Prometheus metrics for fluent-bit, nginx and splunkforwarder
  - Grafana dashboards
 
 ## UI   
@@ -74,9 +75,8 @@ For a shell on the containers, run the commands below.
 
 ## Testing
 
-The HEC port is exposed in the `docker-compose.yml` file. This opens the HEC on localhost:8088.
-
-To see it in action, run the cURL command,
+To test the HEC, expose a forwarder port 8088 on localhost and run the cURL
+command,
 
 ```
 curl -u 'x:3e6ffd12-0f69-46bb-ad0d-71cffb661a0d' -X POST -d'
