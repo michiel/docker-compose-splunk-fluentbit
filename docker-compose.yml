@@ -28,6 +28,21 @@ services:
       - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
       - "splunk01logs:/opt/splunk/var/log"
 
+  mtail01:
+    hostname: mtail01
+    image: mtail-latest:latest
+    volumes:
+      - "splunk01logs:/logs"
+      - "./volumes/mtail-progs:/progs"
+    entrypoint:
+      - "/usr/bin/mtail"
+      - "--logs=/logs/splunk/splunkd.log"
+      - "--logs=/logs/splunk/metrics.log"
+      - "--logs=/logs/introspection/http_event_collector_metrics.log"
+      - "--progs=/progs"
+    ports:
+     - 3903:3903
+
   splunkforwarder02:
     hostname: splunkforwarder02
     image: splunk/universalforwarder:7.0.3
@@ -40,6 +55,21 @@ services:
     volumes:
       - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
       - "splunk02logs:/opt/splunk/var/log"
+
+  mtail02:
+    hostname: mtail02
+    image: mtail-latest:latest
+    volumes:
+      - "splunk02logs:/logs"
+      - "./volumes/mtail-progs:/progs"
+    entrypoint:
+      - "/usr/bin/mtail"
+      - "--logs=/logs/splunk/splunkd.log"
+      - "--logs=/logs/splunk/metrics.log"
+      - "--logs=/logs/introspection/http_event_collector_metrics.log"
+      - "--progs=/progs"
+    ports:
+     - 3904:3903
 
   nginx:
     hostname: nginx
@@ -78,6 +108,8 @@ services:
     links:
       - "fluentbit"
       - "nginxexporter"
+      - "mtail01"
+      - "mtail02"
 
   grafana:
     hostname: grafana
