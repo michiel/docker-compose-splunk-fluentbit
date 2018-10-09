@@ -17,12 +17,12 @@ package "Integration" {
 package "Splunk Platform" {
   interface "HEC" as HEC01
   interface "HEC" as HEC02
-  interface "HEC" as HEC03
+
+  component "mtail" as MTAIL01
 
   package "Forwarder Pool" {
     component "Splunk HF 01" as HF01
     component "Splunk HF 02" as HF02
-    component "Splunk HF 03" as HF03
   }
   component "Splunk IDX" as IDX
   component "Splunk SHC" as SHC
@@ -32,14 +32,14 @@ DataSource -d-> fluentbit #Red
 fluentbit -d-> envoy #Red
 envoy -d-> HEC01 #Red
 envoy -d-> HEC02 #Red
-envoy -d-> HEC03 #Red
 HEC01 -d-> HF01 #Red
 HEC02 -d-> HF02 #Red
-HEC03 -d-> HF03 #Red
 HF01 -d-> IDX #Red
 HF02 -d-> IDX #Red
-HF03 -d-> IDX #Red
 SHC -u-> IDX #Red
+
+MTAIL01 -r-> HF02 #Blue
+Prometheus -r-> MTAIL01 #Blue
 
 Prometheus -u-> Scraper #Blue
 Scraper -u-> fluentbit #Blue
