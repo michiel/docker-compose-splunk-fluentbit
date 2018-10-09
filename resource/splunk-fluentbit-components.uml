@@ -11,8 +11,7 @@ package "Monitoring Services" {
 
 package "Integration" {
   component "fluent-bit" as fluentbit
-  component "nginx" as nginx
-  component "nginx-exporter" as nginxexporter
+  component "envoy" as envoy
 }
 
 package "Splunk Platform" {
@@ -30,10 +29,10 @@ package "Splunk Platform" {
 }
 
 DataSource -d-> fluentbit #Red
-fluentbit -d-> nginx #Red
-nginx -d-> HEC01 #Red
-nginx -d-> HEC02 #Red
-nginx -d-> HEC03 #Red
+fluentbit -d-> envoy #Red
+envoy -d-> HEC01 #Red
+envoy -d-> HEC02 #Red
+envoy -d-> HEC03 #Red
 HEC01 -d-> HF01 #Red
 HEC02 -d-> HF02 #Red
 HEC03 -d-> HF03 #Red
@@ -44,8 +43,7 @@ SHC -u-> IDX #Red
 
 Prometheus -u-> Scraper #Blue
 Scraper -u-> fluentbit #Blue
-nginxexporter -r-> nginx #Blue
-Scraper -u-> nginxexporter #Blue
+Scraper -r-> envoy #Blue
 Grafana -u-> Prometheus #Blue
 
 note right of fluentbit
@@ -54,7 +52,7 @@ note right of fluentbit
  * Reports metrics http:2020
 end note
 
-note right of nginx
+note right of envoy
  * Proxy HTTP:8088 / HEC
  * Load balance HF pool
 end note

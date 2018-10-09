@@ -71,29 +71,26 @@ services:
     ports:
      - 3904:3903
 
-  nginx:
-    hostname: nginx
-    image: nginx:1.15-alpine
+  envoy:
+    hostname: envoy
+    image: envoyproxy/envoy-alpine:v1.8.0
     links:
       - "splunkforwarder01"
       - "splunkforwarder02"
     volumes:
-      - "./volumes/nginx/nginx.conf:/etc/nginx/nginx.conf"
-
-  nginxexporter:
-    hostname: nginx-exporter
-    image: nginx/nginx-prometheus-exporter:0.1.0
-    command: "-nginx.scrape-uri http://nginx:2020/status"
-    links:
-      - "nginx"
-    environment:
-      SCRAPE_URI: nginx:2020/status
+      - "./volumes/envoy/front-envoy.yaml:/etc/front-envoy.yaml"
+    entrypoint:
+      - "/usr/local/bin/envoy"
+      - "-c"
+      - "/etc/front-envoy.yaml"
+    ports:
+     - 8001:8001
 
   fluentbit:
     hostname: fluentbit
     image: fluent/fluent-bit:0.13.2
     links:
-      - "nginx"
+      - "envoy"
     volumes:
       - "./volumes/fluent-bit-etc:/fluent-bit/etc"
 
@@ -106,8 +103,8 @@ services:
     ports:
      - 9090:9090
     links:
+      - "envoy"
       - "fluentbit"
-      - "nginxexporter"
       - "mtail01"
       - "mtail02"
 

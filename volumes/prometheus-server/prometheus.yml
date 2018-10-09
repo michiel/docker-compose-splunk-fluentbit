@@ -10,15 +10,15 @@ scrape_configs:
     static_configs:
       - targets: ['fluentbit:2020']
 
-  - job_name: 'nginxexporter'
-    scrape_interval: 5s
-    metrics_path: /metrics
-    static_configs:
-      - targets: ['nginxexporter:9113']
-
   - job_name: 'mtail'
     scrape_interval: 5s
     metrics_path: /metrics
     static_configs:
       - targets: ['mtail01:3903', 'mtail02:3904']
+
+  - job_name: 'envoy'
+    scrape_interval: 5s
+    metrics_path: /stats/prometheus
+    static_configs:
+      - targets: ['envoy:8001']
 

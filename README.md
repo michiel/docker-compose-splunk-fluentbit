@@ -19,7 +19,7 @@ To bring down and clean up the containers run,
 
  - Backpressure-sensitive heartbeat
  - Transport to remote Splunk platform over HTTP
- - Prometheus metrics for fluent-bit, nginx and splunkforwarder
+ - Prometheus metrics for fluent-bit, envoy and splunkforwarder
  - Grafana dashboards
 
 ## UI   
@@ -29,6 +29,7 @@ To bring down and clean up the containers run,
 | Splunk UI      | [http://localhost:8000/](http://localhost:8000/) | admin     | admin    |
 | Prometheus     | [http://localhost:9090/](http://localhost:9090/) | admin     | admin    |
 | Grafana        | [http://localhost:3000/](http://localhost:3030/) | admin     | admin    |
+| Envoy          | [http://localhost:8001/](http://localhost:8001/) |           |          |
 
 ## Composition
 
@@ -39,8 +40,7 @@ This docker-compose image uses,
  - [A public, official fluentbit image](https://hub.docker.com/r/fluent/fluent-bit/)
  - [A public, official prometheus image](https://hub.docker.com/r/prom/prometheus)
  - [A public, official grafana image](https://hub.docker.com/r/grafana/grafana)
- - [A public, official nginx image](https://hub.docker.com/_/nginx)
- - [A public, official nginx-prometheus-exporter image](https://hub.docker.com/r/nginxinc/nginx-prometheus-exporter)
+ - [A public, official envoy image](https://hub.docker.com/r/envoyproxy/envoy-alpine)
 
 ### Components
 
