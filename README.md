@@ -15,6 +15,12 @@ To bring down and clean up the containers run,
 
     docker-compose down
 
+## Versions
+
+ - [v1.2.0 - Use envoy instead of nginx](https://github.com/michiel/docker-compose-splunk-fluentbit/tree/v1.2.0)
+ - [v1.1.0 - Replace Splunk UF with nginx, transport events over HTTP to HEC](https://github.com/michiel/docker-compose-splunk-fluentbit/tree/v1.1.0)
+ - [v1.0.0 - Ship HEC-ready events to Splunk UF, transport events via Splunk2Splunk TCP](https://github.com/michiel/docker-compose-splunk-fluentbit/tree/v1.0.0)
+
 ## Notable features
 
  - Backpressure-sensitive heartbeat
