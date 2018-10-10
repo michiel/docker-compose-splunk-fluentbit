@@ -11,9 +11,9 @@ services:
     ports:
       - "8000:8000" # splunk UI
     volumes:
-      - "./splunk-apps/demo_hf:/opt/splunk/etc/apps/demo_hf"
-      - "./splunk-apps/demo_idx:/opt/splunk/etc/apps/demo_idx"
-      - "./splunk-apps/demo_shc:/opt/splunk/etc/apps/demo_shc"
+      - "./volumes/splunk-apps/demo_hf:/opt/splunk/etc/apps/demo_hf"
+      - "./volumes/splunk-apps/demo_idx:/opt/splunk/etc/apps/demo_idx"
+      - "./volumes/splunk-apps/demo_shc:/opt/splunk/etc/apps/demo_shc"
 
   splunkforwarder01:
     hostname: splunkforwarder01
@@ -25,7 +25,7 @@ services:
       SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
       SPLUNK_FORWARD_SERVER: 'splunk:9997'
     volumes:
-      - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
+      - "./volumes/splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
       - "splunk01logs:/opt/splunk/var/log"
 
   mtail01:
@@ -53,7 +53,7 @@ services:
       SPLUNK_CMD: 'edit user admin -password admin -role admin -auth admin:changeme'
       SPLUNK_FORWARD_SERVER: 'splunk:9997'
     volumes:
-      - "./splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
+      - "./volumes/splunk-apps/demo_uf:/opt/splunk/etc/apps/demo_uf"
       - "splunk02logs:/opt/splunk/var/log"
 
   mtail02:
