@@ -7,19 +7,8 @@ transform them and send them to Splunk via the HTTP Event Collector (HEC). The
 main Splunk instance contains an example dashboard displaying the incoming
 metrics.
 
-Bring up the containers by running,
-
-    docker-compose up
-
-To bring down and clean up the containers run,
-
-    docker-compose down
-
-## Versions
-
- - [v1.2.0 - Use envoy instead of nginx](https://github.com/michiel/docker-compose-splunk-fluentbit/tree/v1.2.0)
- - [v1.1.0 - Replace Splunk UF with nginx, transport events over HTTP to HEC](https://github.com/michiel/docker-compose-splunk-fluentbit/tree/v1.1.0)
- - [v1.0.0 - Ship HEC-ready events to Splunk UF, transport events via Splunk2Splunk TCP](https://github.com/michiel/docker-compose-splunk-fluentbit/tree/v1.0.0)
+End-to-end data pipeline visibility is provided by exposing metrics in
+Prometheus format for fluent-bit, envoy and the Splunk forwarders.
 
 ## Notable features
 
@@ -28,14 +17,32 @@ To bring down and clean up the containers run,
  - Prometheus metrics for fluent-bit, envoy and splunkforwarder
  - Grafana dashboards
 
+## Versions
+
+ - [v1.2.0 - Replace nginx with envoy](https://github.com/michiel/docker-compose-splunk-fluentbit/tree/v1.2.0)
+ - [v1.1.0 - Replace Splunk UF with nginx, transport events over HTTP to HEC](https://github.com/michiel/docker-compose-splunk-fluentbit/tree/v1.1.0)
+ - [v1.0.0 - Ship HEC-ready events to Splunk UF, transport events via Splunk2Splunk TCP](https://github.com/michiel/docker-compose-splunk-fluentbit/tree/v1.0.0)
+
+## Running
+
+Bring up the containers by running,
+
+    docker-compose up
+
+To bring down and clean up the containers run,
+
+    docker-compose down
+
 ## UI   
 
-| Function       | URL                                              | Username  | Password |
+|                | URL                                              | Username  | Password |
 |----------------|--------------------------------------------------|-----------|----------|
 | Splunk UI      | [http://localhost:8000/](http://localhost:8000/) | admin     | admin    |
 | Prometheus     | [http://localhost:9090/](http://localhost:9090/) | admin     | admin    |
 | Grafana        | [http://localhost:3000/](http://localhost:3030/) | admin     | admin    |
-| Envoy          | [http://localhost:8001/](http://localhost:8001/) |           |          |
+| Envoy          | [http://localhost:8001/](http://localhost:8001/) | N/A       | N/A      |
+| mtail          | [http://localhost:3903/](http://localhost:3903/) | N/A       | N/A      |
+| mtail          | [http://localhost:3904/](http://localhost:3904/) | N/A       | N/A      |
 
 ## Composition
 
@@ -47,6 +54,7 @@ This docker-compose image uses,
  - [A public, official prometheus image](https://hub.docker.com/r/prom/prometheus)
  - [A public, official grafana image](https://hub.docker.com/r/grafana/grafana)
  - [A public, official envoy image](https://hub.docker.com/r/envoyproxy/envoy-alpine)
+ - [A public, unofficial mtail image](https://hub.docker.com/r/jaymedh/docker-mtail/)
 
 ### Components
 
@@ -77,7 +85,9 @@ For a shell on the containers, run the commands below.
     ./script/shell-splunkforwarder02.sh
     ./script/shell-fluentbit.sh
     ./script/shell-prometheus.sh
-    ./script/shell-grafan.sh
+    ./script/shell-grafana.sh
+    ./script/shell-mtail01.sh
+    ./script/shell-mtail02.sh
 
 ## Testing
 
