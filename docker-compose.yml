@@ -30,12 +30,12 @@ services:
 
   mtail01:
     hostname: mtail01
-    image: mtail-latest:latest
+    image: jaymedh/docker-mtail:latest
     volumes:
       - "splunk01logs:/logs"
       - "./volumes/mtail-progs:/progs"
     entrypoint:
-      - "/usr/bin/mtail"
+      - "/bin/mtail"
       - "--logs=/logs/splunk/splunkd.log"
       - "--logs=/logs/splunk/metrics.log"
       - "--logs=/logs/introspection/http_event_collector_metrics.log"
@@ -58,12 +58,12 @@ services:
 
   mtail02:
     hostname: mtail02
-    image: mtail-latest:latest
+    image: jaymedh/docker-mtail:latest
     volumes:
       - "splunk02logs:/logs"
       - "./volumes/mtail-progs:/progs"
     entrypoint:
-      - "/usr/bin/mtail"
+      - "/bin/mtail"
       - "--logs=/logs/splunk/splunkd.log"
       - "--logs=/logs/splunk/metrics.log"
       - "--logs=/logs/introspection/http_event_collector_metrics.log"
