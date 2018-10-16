@@ -88,7 +88,7 @@ services:
 
   fluentbit:
     hostname: fluentbit
-    image: fluent/fluent-bit:0.13.2
+    image: fluent/fluent-bit:0.14.4
     links:
       - "envoy"
     volumes:
